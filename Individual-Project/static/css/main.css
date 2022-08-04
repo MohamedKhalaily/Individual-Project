@@ -1,0 +1,51 @@
+*{
+  margin: 0;
+  padding: 0;
+}
+
+
+.main{
+  width: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.0))50%,rgba(0, 0, 0, 0.0)50%,url(cs.jpeg);
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+}
+
+
+
+.navbar{
+  width: 120px;
+  height: 75px;
+  margin: auto;
+}
+
+.icon{
+  width: 200px;
+  float:left;
+  height: 70px;
+
+}
+
+.logo{
+  color:rgb(245, 113, 5);
+  font-size: 35px;
+  font-family: Arial;
+  padding-left: 28;
+  float: left;
+  padding-top: 10px;
+  
+
+}
+
+.menu{
+  width: 400px;
+  float: left;
+  height: 70px;
+
+}
+
+
+
+
+
