@@ -4,12 +4,10 @@
 }
 
 
-.main{
+body{
   width: 100%;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.0))50%,rgba(0, 0, 0, 0.0)50%,url(cs.jpeg);
-  background-position: center;
-  background-size: cover;
-  height: 100vh;
+  background-image: url(https://s3.envato.com/files/212542380/Dark%20Background%20%20%20%2001_preview1%20.JPG)
+ 
 }
 
 
@@ -44,6 +42,7 @@
   height: 70px;
 
 }
+
 
 
 

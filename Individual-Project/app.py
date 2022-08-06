@@ -11,11 +11,12 @@ config= {
   "messagingSenderId": "354369135578",
   "appId": "1:354369135578:web:406f790e52196455df96e3",
   "measurementId": "G-XXTRXTWHJE",
-  "databaseURL": ""
+  "databaseURL": "https://hamodaly-9e7bf-default-rtdb.europe-west1.firebasedatabase.app/"
 }
  
 firebase = pyrebase.initialize_app(config)
 auth = firebase.auth()
+db=firebase.database()
 
 
 
@@ -31,8 +32,10 @@ def signup():
        email = request.form['email']
        password = request.form['password']
        try:
-            login_session['user'] = auth.create_user_with_email_and_password(email, password)
-            return redirect(url_for('home'))
+            login_session['user'] = auth.create_user_with_email_and_password(email, password,)
+            user=request.form['full_name']
+            db.child("Users").child(login_session['user']['localId']).set(user)
+            return redirect(url_for('main'))
        except:
            error = "Authentication failed"
    return render_template("signup.html")
@@ -43,13 +46,10 @@ def signup():
 def signin():
     error = ""
     if request.method == 'POST':
-       email = request.form['email'] = request.form['email']
-       password = request.form['password'] =  request.form['password']
-       try:
-            login_session['user'] = auth.sign_in_with_email_and_password(email, password)
-            return redirect(url_for('home'))
-       except:
-           error = "Authentication failed"
+        user = {"email":request.form["email"],"password":request.form["password"] , "username":request.form["username"]}
+        db.child("users").child(login_session['user']['localid']).set(user)
+        login_session['user'] = auth.sign_in_with_email_and_password(email, password)
+        return redirect(url_for('main'))
     return render_template("signin.html")
 
 
@@ -59,12 +59,21 @@ def signout():
     auth.current_user = None
     return redirect(url_for('signin'))
 
+@app.route('/main', methods=['GET', 'POST'])
+def main():
+    x=db.child("Users").child(login_session['user']['localId']).get().val()
+    return render_template("main.html",n=x)
 
-@app.route('/add_tweet', methods=['GET', 'POST'])
-def add_tweet():
-    return render_template("add_tweet.html")
      
 #Code goes above here
 
 if __name__ == '__main__':
     app.run(debug=True)
+
+
+
+
+
+
+
+
